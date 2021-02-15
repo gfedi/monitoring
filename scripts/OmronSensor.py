@@ -56,7 +56,7 @@ try:
   command = bytearray([0x52, 0x42, 0x0a, 0x00, 0x02, 0x11, 0x51, DISPLAY_RULE_NORMALLY_ON, 0x00, 0, 255, 0])
   command = command + calc_crc(command, len(command))
   ser.write(command)
-  time.sleep(0.1)
+  time.sleep(0.3)
   ret = ser.read(ser.inWaiting())
 
   while ser.isOpen():
@@ -64,12 +64,17 @@ try:
     command = bytearray([0x52, 0x42, 0x05, 0x00, 0x01, 0x21, 0x50])
     command = command + calc_crc(command, len(command))
     tmp = ser.write(command)
-    time.sleep(0.1)
+    time.sleep(0.3)
     data = ser.read(ser.inWaiting())
   #print(data)
-
+    
     client = snap7.client.Client()
     client.connect('137.138.192.181', 0, 0)
+    topo = client.db_read(444,10,16)
+    topo2 = client.db_read(445,2,16)
+    humy_1 = client.db_read(402,36,1)
+    humy_2 = client.db_read(402,44,1)
+
 
     probes = {}
     probes['RelHumidity']=0
@@ -85,8 +90,6 @@ try:
 
 
 
-    topo = client.db_read(444,10,16)
-    topo2 = client.db_read(445,2,16)
     temps={}
     temps2={}
 
@@ -148,6 +151,8 @@ try:
     dblist.append(["rackA09.sensors.pga", ( timestamp, pga) ])
     dblist.append(["rackA09.sensors.seismic_intensity", ( timestamp, seismic_intensity) ])
     dblist.append(["rackA09.sensors.dew_point", ( timestamp, dew_point ) ])
+    dblist.append(["rackA09.sensors.condensation_NC", ( timestamp, humy_1[0]&0b00001 ) ])
+    dblist.append(["rackA09.sensors.condensation_NO", ( timestamp, humy_2[0]&0b00001 ) ])
 
     payload = pickle.dumps(dblist, protocol=2)
     header = struct.pack("!L", len(payload))
