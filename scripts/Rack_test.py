@@ -5,16 +5,13 @@ import pickle
 import sys
 import re
 import time
-import snap7
 import struct
 import colorsys
 import os
 import socket
 import datetime
-from bs4 import BeautifulSoup
 import sys
 import urllib2
-import requests
 
 
 def readtempA(address,sensor):
@@ -65,7 +62,7 @@ upper_right=readtempA("5c","8")
 
 PSU_currentB = getsnmpB("enterprises.12148.10.5.2.5.0")/10
 PSU_voltageB = getsnmpB("enterprises.12148.10.10.5.5.0")/100
-PSU_powerB = PSU_current*PSU_voltage
+PSU_powerB = PSU_currentB*PSU_voltageB
 Rect_tempB = getsnmpB("enterprises.12148.10.5.18.5.0")
 
 local_tempB = readtempB("10","2")
@@ -109,26 +106,27 @@ dblist.append(["rackA16.PSUB.voltage", ( timestamp, PSU_voltageB ) ])
 dblist.append(["rackA16.PSUB.power", ( timestamp, PSU_powerB ) ])
 dblist.append(["rackA16.PSUB.temp", ( timestamp, Rect_tempB ) ])
 
-print(dblist)
+for entry in dblist:
+  print(entry)
 
 payload = pickle.dumps(dblist, protocol=2)
 header = struct.pack("!L", len(payload))
 message = header + payload
 
 retrycount = 0
-#while (retrycount < 10):
+while (retrycount < 10):
 
-  #sock = socket.socket()
-  #sock.settimeout(1)
+  sock = socket.socket()
+  sock.settimeout(1)
 
-  #try :
-    #sock.connect(('137.138.192.171', 2004))
-    #sock.send(message)
-    #break;
+  try :
+    sock.connect(('137.138.192.171', 2004))
+    sock.send(message)
+    break;
 
-  #except (socket.timeout, socket.error) as error:
-    #logging.error('connect error: %s', error)
-    #retrycount += 1
+  except (socket.timeout, socket.error) as error:
+    logging.error('connect error: %s', error)
+    retrycount += 1
 
-#sock.close()
+sock.close()
 
