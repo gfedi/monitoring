@@ -15,7 +15,7 @@ import urllib2
 
 
 def readtempA(address,sensor):
-  stream = os.popen('ssh root@192.168.0.2 "clia sensordata '+address+' 0:'+sensor+'|grep Processed|cut -b 21-25"')
+  stream = os.popen('ssh root@192.168.0.4 "clia sensordata '+address+' 0:'+sensor+'|grep Processed|cut -b 21-25"')
   temp_cc=""
   for i in stream.read():
     temp_cc+=i
@@ -23,7 +23,7 @@ def readtempA(address,sensor):
 
 
 def getsnmpA(address):
-  stream = os.popen('snmpwalk  -v2c -c public 192.168.0.20 '+address+' |cut -d " " -f 4')
+  stream = os.popen('snmpwalk  -v2c -c public 192.168.0.22 '+address+' |cut -d " " -f 4')
   temp_cc=""
   for i in stream.read():
     temp_cc+=i
