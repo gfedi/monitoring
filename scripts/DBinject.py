@@ -70,15 +70,15 @@ PSU_current = getsnmp("enterprises.12148.10.5.2.5.0")/10
 PSU_voltage = getsnmp("enterprises.12148.10.10.5.5.0")/100
 PSU_power=PSU_current*PSU_voltage
 
-lower_left=readtemp("5a","7")
-lower_center=readtemp("5a","8")
-lower_right=readtemp("5a","9")
-upper_left=readtemp("5c","6")
-upper_center=readtemp("5c","7")
-upper_right=readtemp("5c","8")
-external=readexttemp()
-rpmlower=readrpm("5a")
-rpmupper=readrpm("5c")
+lower_left=0#readtemp("5a","7")
+lower_center=0#readtemp("5a","8")
+lower_right=0#readtemp("5a","9")
+upper_left=0#readtemp("5c","6")
+upper_center=0#readtemp("5c","7")
+upper_right=0#readtemp("5c","8")
+external=0#readexttemp()
+rpmlower=0#readrpm("5a")
+rpmupper=0#readrpm("5c")
 
 timestamp = time.time()
 
@@ -109,7 +109,7 @@ while (retrycount < 10):
   sock.settimeout(1)
 
   try :
-    sock.connect(('137.138.192.171', 2004))
+    sock.connect(('128.141.49.116', 2004))
     sock.send(message)
     break;
 

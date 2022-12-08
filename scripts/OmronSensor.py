@@ -137,6 +137,7 @@ try:
     dblist = []
     dblist.append(["rackA09.cooling.setwatertemp", ( timestamp, temps2['SetWaterTemp']) ])
     dblist.append(["rackA09.cooling.inletwatertemp", ( timestamp, temps2['InletWaterTemp']) ])
+    dblist.append(["rackA09.cooling.inletwatertemp2hago", ( timestamp-7200, temps2['InletWaterTemp']) ])
     dblist.append(["rackA09.cooling.outletwatertemp", ( timestamp, temps2['OutletWaterTemp']) ])
     dblist.append(["rackA09.cooling.valveopening", ( timestamp, temps2['ValveOpening']) ])
     dblist.append(["rackA09.sensors.temperature", ( timestamp, temperature ) ])
@@ -151,6 +152,7 @@ try:
     dblist.append(["rackA09.sensors.pga", ( timestamp, pga) ])
     dblist.append(["rackA09.sensors.seismic_intensity", ( timestamp, seismic_intensity) ])
     dblist.append(["rackA09.sensors.dew_point", ( timestamp, dew_point ) ])
+    dblist.append(["rackA09.sensors.dew_point2hago", ( timestamp-7200, dew_point ) ])
     dblist.append(["rackA09.sensors.condensation_NC", ( timestamp, humy_1[0]&0b00001 ) ])
     dblist.append(["rackA09.sensors.condensation_NO", ( timestamp, humy_2[0]&0b00001 ) ])
 
@@ -166,7 +168,7 @@ try:
       sock.settimeout(1)
 
       try :
-        sock.connect(('137.138.192.171', 2004))
+        sock.connect(('128.141.49.116', 2004))
         sock.send(message)
         break;
 

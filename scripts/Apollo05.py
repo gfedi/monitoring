@@ -86,7 +86,7 @@ while (retrycount < 10):
   sock.settimeout(1)
 
   try :
-    sock.connect(('137.138.192.171', 2004))
+    sock.connect(('128.141.49.116', 2004))
     sock.send(message)
     break;
 
