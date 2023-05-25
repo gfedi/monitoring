@@ -69,7 +69,7 @@ try:
   #print(data)
     
     client = snap7.client.Client()
-    client.connect('137.138.192.181', 0, 0)
+    client.connect('128.141.63.209', 0, 0)
     topo = client.db_read(444,10,16)
     topo2 = client.db_read(445,2,16)
     humy_1 = client.db_read(402,36,1)

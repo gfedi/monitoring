@@ -27,7 +27,7 @@ def get_dew_point_c(t_air_c, rel_humidity):
 
     
 client = snap7.client.Client()
-client.connect('137.138.192.181', 0, 0)
+client.connect('128.141.63.209', 0, 0)
 topo = client.db_read(400,30,104)
 topo2 = client.db_read(400,32,4)
 
@@ -64,13 +64,14 @@ for probe in probes:
    x = topo[byte_index:byte_index + 2]
    temps[probe] = struct.unpack('>h', struct.pack('2B', *x))[0]
    
-print("RH=",temps["RH"]*0.0036169," %")
-print("T=",temps["T"]*0.00180845," C")
-print("Flow=",temps["Flow"]*0.00180845," l/min")
-print("RTD1=",temps["RTD1"]*0.1," C")
-print("RTD2=",temps["RTD2"]*0.1," C")
-print("RTD3=",temps["RTD3"]*0.1," C")
-print("RTD4=",temps["RTD4"]*0.1," C")
+#print("RH=",temps["RH"]*0.0036169," %")
+#print("T=",temps["T"]*0.00180845," C")
+#print("Flow=",temps["Flow"]*0.00180845," l/min")
+#print("RTD1=",temps["RTD1"]*0.1," C")
+#print("RTD2=",temps["RTD2"]*0.1," C")
+#print("RTD3=",temps["RTD3"]*0.1," C")
+#print("RTD4=",temps["RTD4"]*0.1," C")
+
 
 try:
     timestamp = time.time()

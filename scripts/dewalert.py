@@ -28,7 +28,7 @@ def get_dew_point_c(t_air_c, rel_humidity):
 
 client = snap7.client.Client()
 #client.connect('172.26.223.107', 0, 0)
-client.connect('137.138.192.181', 0, 0)
+client.connect('128.141.63.209', 0, 0)
 
 
 sequence = ['X1FTop','X1FBottom','X1OFTop','X1OFBottom','X1ORTop','X1ORBottom','X0FTop','X0FBottom','X0OFTop','X0OFBottom','X0ORTop','X0ORBottom']

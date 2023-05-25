@@ -12,7 +12,7 @@ import snap7
 
     
 client = snap7.client.Client()
-client.connect('137.138.192.181', 0, 0)
+client.connect('128.141.63.209', 0, 0)
 topo = client.db_read(402,36,1)
 topo2 = client.db_read(402,44,1)
 
