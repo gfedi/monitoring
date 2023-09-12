@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import logging
 import pickle
@@ -11,9 +11,8 @@ import colorsys
 import os
 import socket
 import datetime
-from bs4 import BeautifulSoup
 import sys
-import urllib2
+import urllib.request as urllib2
 import requests
 
 

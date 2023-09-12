@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import logging
 import pickle
@@ -11,7 +11,7 @@ import os
 import socket
 import datetime
 import sys
-import urllib2
+import urllib.request as urllib2
 
 def readsensorA():
   stream = os.popen('ssh root@192.168.0.2 "clia sensordata"')
